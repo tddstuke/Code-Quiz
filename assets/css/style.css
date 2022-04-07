@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 100%; */
 }
 
 .content {
@@ -22,7 +21,7 @@ p {
   text-align: center;
   line-height: 1.5em;
 }
-#startDiv h1 {
+#start-div h1 {
   text-align: center;
 }
 
@@ -46,5 +45,19 @@ button:hover {
 .btn-div {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 30%;
+}
+
+.answer-div {
+  display: flex;
+  width: 33%;
+  margin: 10px auto 10px auto;
+  border-top: 2px solid grey;
+}
+.answer {
+  margin-top: 0;
+
+  text-align: center;
+  color: grey;
+  font-style: italic;
 }
