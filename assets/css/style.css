@@ -1,7 +1,10 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
-
+header {
+  display: flex;
+  justify-content: space-between;
+}
 #action-div {
   display: flex;
   align-items: center;

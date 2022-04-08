@@ -3,8 +3,36 @@ var pageContentEl = document.querySelector("#page-content");
 var btnDivEl = document.querySelector("#btn-div");
 var setOneDivEl = document.querySelector(".content");
 var actionDivEl = document.querySelector("#action-div");
+var timerEl = document.getElementById("time-left");
+var timeLeft = 75;
+var timeInterval;
+
+var countdown = function () {
+  var timeInterval = setInterval(function () {
+    if (timeLeft > 0) {
+      timerEl.textContent = "Timer: " + timeLeft;
+      timeLeft--;
+    } else {
+      timerEl.textContent = "Timer: 0";
+      clearInterval(timeInterval);
+      console.log("out of time");
+    }
+  }, 1000);
+};
+
+var timeOff = function () {
+  timeLeft = timeLeft - 10;
+  console.log(timeLeft);
+};
+
+var stopTimer = function () {
+  clearInterval(timeInterval);
+  var endTime = timeLeft;
+  return endTime;
+};
 
 var QuizQuestions = function () {
+  countdown();
   var setOneDivEl = document.querySelector(".content");
   setOneDivEl.remove();
 
@@ -189,7 +217,7 @@ var QuizQuestionsFive = function () {
   setOneDivEl.append(setOneH1El, btnDivEl);
   btnDivEl.append(button1El, button2El, button3El, button4El);
 
-  btnDivEl.addEventListener("click", answerClick);
+  btnDivEl.addEventListener("click", answerClickFive);
 };
 
 var answerClick = function (event) {
@@ -221,6 +249,7 @@ var answerClick = function (event) {
     wrongAnswerEl.textContent = "Wrong!";
     pageContentEl.appendChild(answerDivEl);
     answerDivEl.appendChild(wrongAnswerEl);
+    timeOff();
     QuizQuestionsTwo();
   }
 };
@@ -250,6 +279,7 @@ var answerClickTwo = function (event) {
     wrongAnswerEl.textContent = "Wrong!";
     pageContentEl.appendChild(answerDivEl);
     answerDivEl.appendChild(wrongAnswerEl);
+    timeOff();
     QuizQuestionsThree();
   }
 };
@@ -279,6 +309,7 @@ var answerClickThree = function (event) {
     wrongAnswerEl.textContent = "Wrong!";
     pageContentEl.appendChild(answerDivEl);
     answerDivEl.appendChild(wrongAnswerEl);
+    timeOff();
     QuizQuestionsFour();
   }
 };
@@ -308,7 +339,39 @@ var answerClickFour = function (event) {
     wrongAnswerEl.textContent = "Wrong!";
     pageContentEl.appendChild(answerDivEl);
     answerDivEl.appendChild(wrongAnswerEl);
+    timeOff();
     QuizQuestionsFive();
   }
 };
+
+var answerClickFive = function (event) {
+  var targetEl = event.target;
+
+  var answerDivEl = document.querySelector(".answer-div");
+  answerDivEl.remove();
+
+  if (targetEl.matches("#correct")) {
+    console.log("correct");
+    var answerDivEl = document.createElement("div");
+    answerDivEl.className = "answer-div";
+    var correctAnswerEl = document.createElement("h2");
+    correctAnswerEl.className = "answer";
+    correctAnswerEl.textContent = "Correct!";
+    pageContentEl.appendChild(answerDivEl);
+    answerDivEl.appendChild(correctAnswerEl);
+  } else {
+    console.log("false");
+    var answerDivEl = document.createElement("div");
+    answerDivEl.className = "answer-div";
+    var wrongAnswerEl = document.createElement("h2");
+    wrongAnswerEl.className = "answer";
+    wrongAnswerEl.textContent = "Wrong!";
+    pageContentEl.appendChild(answerDivEl);
+    answerDivEl.appendChild(wrongAnswerEl);
+    timeOff();
+    stopTimer();
+};
+
+
+
 startButtonEl.addEventListener("click", QuizQuestions);
