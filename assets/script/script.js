@@ -6,6 +6,7 @@ var actionDivEl = document.querySelector("#action-div");
 var timerEl = document.getElementById("time-left");
 var timeLeft = 75;
 var timeInterval;
+var endTime;
 
 var countdown = function () {
   var timeInterval = setInterval(function () {
@@ -22,13 +23,11 @@ var countdown = function () {
 
 var timeOff = function () {
   timeLeft = timeLeft - 10;
-  console.log(timeLeft);
 };
 
 var stopTimer = function () {
   clearInterval(timeInterval);
-  var endTime = timeLeft;
-  return endTime;
+  timerEl = timeLeft;
 };
 
 var QuizQuestions = function () {
@@ -359,6 +358,7 @@ var answerClickFive = function (event) {
     correctAnswerEl.textContent = "Correct!";
     pageContentEl.appendChild(answerDivEl);
     answerDivEl.appendChild(correctAnswerEl);
+    allDone();
   } else {
     console.log("false");
     var answerDivEl = document.createElement("div");
@@ -369,9 +369,43 @@ var answerClickFive = function (event) {
     pageContentEl.appendChild(answerDivEl);
     answerDivEl.appendChild(wrongAnswerEl);
     timeOff();
-    stopTimer();
+
+    allDone();
+  }
 };
 
+var allDone = function () {
+  stopTimer();
+  //   var answerDivEl = document.querySelector(".answer-div");
+  //   answerDivEl.remove();
+  var setOneDivEl = document.querySelector(".content");
+  setOneDivEl.remove();
+  //   console.log(endtime);
+  timerEl.textContent = timeLeft;
 
+  var setOneDivEl = document.createElement("div");
+  setOneDivEl.classList.add("content", "questions");
+  var actionDivEl = document.querySelector("#action-div");
+
+  var setOneH1El = document.createElement("h1");
+  setOneH1El.textContent = "All Done!";
+
+  var formDivEl = document.createElement("div");
+  formDivEl.className = "form-div";
+
+  var formHeaderEl = document.createElement("h2");
+  formHeaderEl.textContent = "Your final score is " + timeLeft;
+
+  var formEl = document.createElement("form");
+  formEl.innerHTML =
+    "<label for='initials'>Enter Initals:</label><input type ='text' id='initials'>";
+  //   formEl.textContent = "Enter Initials:";
+  var formButton = document.createElement("button");
+  formButton.textContent = "Submit";
+
+  actionDivEl.appendChild(setOneDivEl);
+  setOneDivEl.append(setOneH1El, formDivEl);
+  formDivEl.append(formHeaderEl, formEl, formButton);
+};
 
 startButtonEl.addEventListener("click", QuizQuestions);
