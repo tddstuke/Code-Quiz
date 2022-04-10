@@ -413,19 +413,26 @@ var visitpage = function () {
 var initialInput = function () {};
 var saveHighScore = function (event) {
   event.preventDefault();
-  highScore = JSON.parse(localStorage.getItem("highScore"));
-
-  console.log(highScore);
-  var initials = document.getElementById("initials").value;
-  console.log(timeLeft);
-  console.log(initials);
-  var score = {
-    score: timeLeft,
-    name: initials,
-  };
-  console.log(score);
-  highScore.push(score);
-  localStorage.setItem("highScore", JSON.stringify(highScore));
+  if (localStorage.length > 0) {
+    highScore = JSON.parse(localStorage.getItem("highScore"));
+    var initials = document.getElementById("initials").value;
+    var score = {
+      score: timeLeft,
+      name: initials,
+    };
+    console.log(score);
+    highScore.push(score);
+    localStorage.setItem("highScore", JSON.stringify(highScore));
+  } else {
+    var initials = document.getElementById("initials").value;
+    var score = {
+      score: timeLeft,
+      name: initials,
+    };
+    console.log(score);
+    highScore.push(score);
+    localStorage.setItem("highScore", JSON.stringify(highScore));
+  }
 };
 
 startButtonEl.addEventListener("click", QuizQuestions);
