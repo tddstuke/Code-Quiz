@@ -22,6 +22,9 @@ a:hover {
   justify-content: center;
 }
 
+ol {
+  padding-left: 25px;
+}
 .content {
   width: 33%;
 }
@@ -85,7 +88,7 @@ ol li {
   text-decoration: underline;
 }
 
-#retake {
+#retake #clear {
   padding: 5px;
   margin: 5px;
 }

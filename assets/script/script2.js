@@ -11,11 +11,21 @@ var getHighScores = function () {
   console.log(highScore);
   //   highScore.push(highScore);
 };
+
+var retake = function () {
+  location.href = "./index.html";
+};
+
 getHighScores();
 // getHighScores();
 // sort high scores by highest to lowest
-var sortedScores = highScore.sort((a, b) => (a.score > b.score ? -1 : 1));
-console.log(sortedScores);
+if (localStorage.length > 0) {
+  var sortedScores = highScore.sort((a, b) => (a.score > b.score ? -1 : 1));
+  console.log(sortedScores);
+} else {
+  window.alert("No current high scores");
+  retake();
+}
 
 // Print high scores on page
 var printHighScores = function () {
@@ -31,10 +41,17 @@ var printHighScores = function () {
   reTakeBtn.setAttribute("id", "retake");
   reTakeBtn.textContent = "Retake Quiz";
   buttonDiv.appendChild(reTakeBtn);
-  buttonDiv.addEventListener("click", retake);
+  reTakeBtn.addEventListener("click", retake);
+
+  var clearBtn = document.createElement("button");
+  clearBtn.setAttribute("id", "clear");
+  clearBtn.textContent = "Clear Scores";
+  buttonDiv.appendChild(clearBtn);
+  clearBtn.addEventListener("click", clearStorage);
 };
 
-var retake = function () {
-  location.href = "./index.html";
+var clearStorage = function () {
+  window.localStorage.clear();
+  location.href = "./index2.html";
 };
 printHighScores();
