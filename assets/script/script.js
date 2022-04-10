@@ -28,7 +28,7 @@ var timeOff = function () {
 
 var stopTimer = function () {
   clearInterval(timeInterval);
-  timerEl = timeLeft;
+  //   timerEl = timeLeft;
 };
 
 var QuizQuestions = function () {
@@ -391,23 +391,37 @@ var allDone = function () {
   formHeaderEl.textContent = "Your final score is " + timeLeft;
 
   var formEl = document.createElement("form");
+  formEl.addEventListener("submit", saveHighScore);
   formEl.innerHTML =
     "<label for='initials'>Enter Initals:</label><input type ='text' id='initials'>";
   var formButton = document.createElement("button");
   formButton.textContent = "Submit";
   formButton.setAttribute("id", "save");
-  formButton.addEventListener("click", saveHighScore());
-  formButton.setAttribute("onclick", highScore.push(formEl.input));
+  formButton.addEventListener("click", saveHighScore);
+  //   formButton.setAttribute("onclick", highScore.push(formEl.input));
 
   actionDivEl.appendChild(setOneDivEl);
   setOneDivEl.append(setOneH1El, formDivEl);
   formDivEl.append(formHeaderEl, formEl, formButton);
-  highScore.push(timeLeft);
-  saveHighScore();
+
+  //   saveHighScore();
 };
 
 var initialInput = function () {};
-var saveHighScore = function () {
+var saveHighScore = function (event) {
+  event.preventDefault();
+  highScore = JSON.parse(localStorage.getItem("highScore"));
+
+  console.log(highScore);
+  var initials = document.getElementById("initials").value;
+  console.log(timeLeft);
+  console.log(initials);
+  var score = {
+    score: timeLeft,
+    name: initials,
+  };
+  console.log(score);
+  highScore.push(score);
   localStorage.setItem("highScore", JSON.stringify(highScore));
 };
 
