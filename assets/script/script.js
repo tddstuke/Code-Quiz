@@ -7,9 +7,10 @@ var timerEl = document.getElementById("time-left");
 var timeLeft = 75;
 var timeInterval;
 var endTime;
+var highScore = [];
 
 var countdown = function () {
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     if (timeLeft > 0) {
       timerEl.textContent = "Timer: " + timeLeft;
       timeLeft--;
@@ -222,13 +223,6 @@ var QuizQuestionsFive = function () {
 var answerClick = function (event) {
   var targetEl = event.target;
 
-  //   var quizQuestion = [
-  //     QuizQuestionsTwo,
-  //     QuizQuestionsThree,
-  //     QuizQuestionsFour,
-  //     QuizQuestionsFive,
-  //   ];
-
   if (targetEl.matches("#correct")) {
     console.log("correct");
     var answerDivEl = document.createElement("div");
@@ -380,7 +374,7 @@ var allDone = function () {
   //   answerDivEl.remove();
   var setOneDivEl = document.querySelector(".content");
   setOneDivEl.remove();
-  //   console.log(endtime);
+
   timerEl.textContent = timeLeft;
 
   var setOneDivEl = document.createElement("div");
@@ -399,13 +393,22 @@ var allDone = function () {
   var formEl = document.createElement("form");
   formEl.innerHTML =
     "<label for='initials'>Enter Initals:</label><input type ='text' id='initials'>";
-  //   formEl.textContent = "Enter Initials:";
   var formButton = document.createElement("button");
   formButton.textContent = "Submit";
+  formButton.setAttribute("id", "save");
+  formButton.addEventListener("click", saveHighScore());
+  formButton.setAttribute("onclick", highScore.push(formEl.input));
 
   actionDivEl.appendChild(setOneDivEl);
   setOneDivEl.append(setOneH1El, formDivEl);
   formDivEl.append(formHeaderEl, formEl, formButton);
+  highScore.push(timeLeft);
+  saveHighScore();
+};
+
+var initialInput = function () {};
+var saveHighScore = function () {
+  localStorage.setItem("highScore", JSON.stringify(highScore));
 };
 
 startButtonEl.addEventListener("click", QuizQuestions);
