@@ -84,3 +84,13 @@ ol li {
 #score-header {
   text-decoration: underline;
 }
+
+#retake {
+  padding: 5px;
+  margin: 5px;
+}
+
+#button-div {
+  display: flex;
+  justify-content: center;
+}
