@@ -392,19 +392,22 @@ var allDone = function () {
 
   var formEl = document.createElement("form");
   formEl.addEventListener("submit", saveHighScore);
+  formEl.addEventListener("submit", visitpage);
   formEl.innerHTML =
     "<label for='initials'>Enter Initals:</label><input type ='text' id='initials'>";
   var formButton = document.createElement("button");
   formButton.textContent = "Submit";
   formButton.setAttribute("id", "save");
   formButton.addEventListener("click", saveHighScore);
-  //   formButton.setAttribute("onclick", highScore.push(formEl.input));
+  formButton.addEventListener("click", visitpage);
 
   actionDivEl.appendChild(setOneDivEl);
   setOneDivEl.append(setOneH1El, formDivEl);
   formDivEl.append(formHeaderEl, formEl, formButton);
+};
 
-  //   saveHighScore();
+var visitpage = function () {
+  location.href = "./index2.html";
 };
 
 var initialInput = function () {};

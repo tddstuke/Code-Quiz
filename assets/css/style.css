@@ -75,3 +75,12 @@ button:hover {
   color: grey;
   font-style: italic;
 }
+
+ol li {
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
+#score-header {
+  text-decoration: underline;
+}
