@@ -8,7 +8,7 @@ var timeLeft = 75;
 var timeInterval;
 var endTime;
 var highScore = [];
-
+// initiate countdown function
 var countdown = function () {
   timeInterval = setInterval(function () {
     if (timeLeft > 0) {
@@ -28,9 +28,9 @@ var timeOff = function () {
 
 var stopTimer = function () {
   clearInterval(timeInterval);
-  //   timerEl = timeLeft;
 };
 
+// begin quiz question sets
 var QuizQuestions = function () {
   countdown();
   var setOneDivEl = document.querySelector(".content");
@@ -219,7 +219,7 @@ var QuizQuestionsFive = function () {
 
   btnDivEl.addEventListener("click", answerClickFive);
 };
-
+// begin answerclick functions
 var answerClick = function (event) {
   var targetEl = event.target;
 
@@ -368,10 +368,10 @@ var answerClickFive = function (event) {
   }
 };
 
+// stop timer and create initials and high score form
 var allDone = function () {
   stopTimer();
-  //   var answerDivEl = document.querySelector(".answer-div");
-  //   answerDivEl.remove();
+
   var setOneDivEl = document.querySelector(".content");
   setOneDivEl.remove();
 
@@ -406,11 +406,12 @@ var allDone = function () {
   formDivEl.append(formHeaderEl, formEl, formButton);
 };
 
+// link to highscore page
 var visitpage = function () {
   location.href = "./index2.html";
 };
 
-var initialInput = function () {};
+// save to local storage and retrieve stored date so we can add onto it
 var saveHighScore = function (event) {
   event.preventDefault();
   if (localStorage.length > 0) {

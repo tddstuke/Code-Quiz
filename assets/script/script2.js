@@ -8,8 +8,6 @@ var highScore = [];
 // retrieve high scores from localstorage
 var getHighScores = function () {
   highScore = JSON.parse(localStorage.getItem("highScore"));
-  console.log(highScore);
-  //   highScore.push(highScore);
 };
 
 var retake = function () {
@@ -17,11 +15,10 @@ var retake = function () {
 };
 
 getHighScores();
-// getHighScores();
+
 // sort high scores by highest to lowest
 if (localStorage.length > 0) {
   var sortedScores = highScore.sort((a, b) => (a.score > b.score ? -1 : 1));
-  console.log(sortedScores);
 } else {
   window.alert("No current high scores");
   retake();
