@@ -4,7 +4,7 @@
 
 Small coding quiz to test skills
 
-## Features
+## Feature
 
 - Timer starts when quiz is started
 - After choosing any answer quiz cycles to next question
